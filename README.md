@@ -10,7 +10,7 @@
 
 ### 1\. Installing Required Dependencies
 
-bashCopy code
+bash*
 
 `sudo yum install -y epel-release
 
@@ -20,7 +20,7 @@ sudo alternatives --set python /usr/bin/python3`
 
 ### 2\. Installing Ansible
 
-bashCopy code
+bash*
 
 `sudo yum install -y ansible`
 
@@ -30,7 +30,7 @@ Installed Ansible Core version: 2.14.2
 
 ### 3\. Installing Argcomplete for Shell Completion
 
-bashCopy code
+bash*
 
 `sudo yum install -y python3-argcomplete
 
@@ -42,7 +42,7 @@ Edit `/etc/ansible/hosts` and add `rhhost2` to the inventory.
 
 Check with:
 
-bashCopy code
+bash*
 
 `sudo ansible all --list-hosts`
 
@@ -50,7 +50,7 @@ bashCopy code
 
 ### 5\. Generating SSH Keys
 
-bashCopy code
+bash*
 
 `sudo ssh-keygen
 
@@ -58,19 +58,19 @@ ls ~/.ssh/`
 
 Copy keys to `rhhost2`:
 
-bashCopy code
+bash*
 
 `ssh-copy-id 10.0.2.22`
 
 Check success:
 
-bashCopy code
+bash*
 
 `ansible -m ping all`
 
 ### 6\. Sending Uptime Command
 
-bashCopy code
+bash*
 
 `ansible -a "uptime" all`
 
@@ -92,7 +92,7 @@ II. Using Ad Hoc Commands
 
 ### 1\. Creating Files with 'file' Module
 
-bashCopy code
+bash*
 
 `ansible rhhost2 -m file -a "path=/home/user1/file2.txt state=touch mode=700"
 
@@ -113,7 +113,7 @@ ansible rhhost2* -m file -a "dest=/home/user1/file2.txt mode=600 owner=root grou
 
 ### 2\. Installing HTTPD with Yum Module
 
-bashCopy code
+bash*
 
 `ansible rhhost2* -m yum -a "name=httpd state=installed" -b -K
 
@@ -135,7 +135,7 @@ ansible rhhost2* -m shell -a "/sbin/reboot" -b -K`
 
 ### 3\. Managing Users
 
-bashCopy code
+bash*
 
 `ansible rhhost2* -m user -a 'name=user2 state=present home=/home/user2 shell=/bin/bash' -b -K
 
@@ -149,7 +149,7 @@ ansible rhhost2* -m user -a 'name=user2 state=absent' -b -K`
 
 ### 4\. Gathering Host Data
 
-bashCopy code
+bash*
 
 `ansible rhhost2* -m setup -a "gather_subset=network" | grep address  # on rhhost1
 
@@ -159,7 +159,7 @@ ifconfig | grep inet  # on rhhost2`
 
 Dump setup information into a file:
 
-bashCopy code
+bash*
 
 `ansible rhhost2* -m setup --tree /tmp/facts
 
@@ -173,7 +173,7 @@ Visualize with Firefox.
 
 ![Picture17](https://github.com/jbdjerhy/CyberSecurity-Projects/assets/142699688/f02e5b9f-3327-4bb7-b385-d10f515e7169)
 
-bashCopy code
+bash*
 
 `ansible -b -K
 
@@ -181,7 +181,7 @@ cd webservers`
 
 List inventory:
 
-bashCopy code
+bash*
 
 `ansible-inventory --list --output inventory.json`
 
@@ -192,7 +192,7 @@ III. Creating a Simple Ansible Playbook: apache.yml
 
 ---------------------------------------------------
 
-yamlCopy code
+yaml*
 
 `---
 
@@ -226,7 +226,7 @@ yamlCopy code
 
 ### Downloading Atom Editor
 
-bashCopy code
+bash*
 
 `sudo vi /etc/yum.repos.d/atom.repo
 
@@ -254,7 +254,7 @@ gpgkey=https://packagecloud.io/AtomEditor/atom/gpgkey
 
 Create `~/.vimrc`:
 
-bashCopy code
+bash*
 
 `" YAML config
 
@@ -264,19 +264,19 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab `
 
 Install Vim indentLine plugin:
 
-bashCopy code
+bash*
 
 `git clone https://github.com/yggdroot/indentLine.git ~/.vim/pack/vendor/start/indentLine`
 
 Install YAML lint:
 
-bashCopy code
+bash*
 
 `sudo yum install -y yamllint`
 
 Relax the config:
 
-bashCopy code
+bash*
 
 `mkdir ~/.config/yamllint
 
@@ -315,7 +315,7 @@ Using a working role with playbook site.yml:
 
 ---
 
-# This playbook deploys all site configs
+### This playbook deploys all site configs
 
 - name: apply base configuration to all nodes
 
@@ -331,7 +331,7 @@ Vim roles/base/tasks/main.yml
 
 ---
 
-# This playbook contains base plays for all nodes
+### This playbook contains base plays for all nodes
 
 - name: Install firewalld
 
@@ -359,7 +359,7 @@ In order to test the use of the include statement I have:
 
 ---
 
-# Install apache
+### Install apache
 
 - name: Install apache
 
@@ -381,7 +381,7 @@ In order to test the use of the include statement I have:
 
 ---
 
-# This playbook deploys all site configs
+### This playbook deploys all site configs
 
 - name: apply base configuration to all nodes
 
@@ -443,7 +443,7 @@ Ran successfully ans returned IP informaotion for enp0s8
 
 Modify `roles/base/tasks/main.yml`:
 
-yamlCopy code
+yaml*
 
 `---
 
@@ -459,7 +459,7 @@ yamlCopy code
 
 Create variables in `group_vars/all`:
 
-yamlCopy code
+yaml*
 
 `# Variables for the all group
 
@@ -480,7 +480,7 @@ Ran site.yml successfully
 
 Modify `welcome.yml` and `welcome.j2`:
 
-yamlCopy code
+yaml*
 
 `# welcome.yml
 
@@ -504,7 +504,7 @@ yamlCopy code
 
         dest: /home/user1/welcome.txt`
 
-jinja2Copy code
+jinja2*
 
 `# welcome.j2
 
